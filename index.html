@@ -12,9 +12,22 @@
         <div id="app">
             <header id="header">
                 <div class="menu-bar">
-                    <span class="menu" v-for="menu in header.menuBar.menus">
+                    <span
+                        :id="'menu__' + menu.subMenuId"
+                        class="menu"
+                        v-for="menu in header.menuBar.menus"
+                        @click="switchSubMenuShown"
+                    >
                         {{ menu.name }}
                     </span>
+                </div>
+                <div class="sub-menus" v-show="header.subMenus.isShown">
+                    <div
+                        class="sub-menu"
+                        v-for="subMenu in header.subMenus[header.subMenus.shownSubMenuId]"
+                    >
+                        {{ subMenu.shownName }}
+                    </div>
                 </div>
             </header>
             <main id="main"></main>
