@@ -18,9 +18,14 @@ body {
                     padding: 5px 10px 5px 10px;
                 }
                 .menu:hover {
-                    background-color: #E0E0E0;
-                    color: black
+                    background-color: #e0e0e0;
+                    color: black;
                 }
+            }
+            .sub-menus {
+                left: 0;
+                position: absolute;
+                top: 0;
             }
         }
     }
