@@ -1,19 +1,43 @@
 const app = new Vue({
     el: "#app",
     data: {
+        isCoverShown: false,
         header: {
             menuBar: {
+                isMouseDowned: false,
+                isClicked: false,
                 menus: [
-                    { name: "ファイル", subMenuId: "file" },
-                    { name: "その他", subMenuId: "other" },
+                    { name: "ファイル", subMenusId: "file" },
+                    { name: "その他", subMenusId: "other" },
                 ],
             },
             subMenus: {
                 isShown: false,
-                shownSubMenuId: null,
+                shownSubMenusId: null,
+                position: { top: 0, left: 0 },
+            },
+        },
+    },
+    mounted: function () {
+        document.body.addEventListener("keydown", this.keyDowned);
+        this.header.subMenus = {
+            ...this.header.subMenus,
+            ...{
                 file: [
                     {
-                        shownName: "プロジェクトファイルを開く",
+                        shownName: "プロジェクトを開く",
+                        executedFunction: this.openProjectFile,
+                    },
+                    {
+                        shownName: "上書き保存",
+                        executedFunction: this.openProjectFile,
+                    },
+                    {
+                        shownName: "名前を付けて保存",
+                        executedFunction: this.openProjectFile,
+                    },
+                    {
+                        shownName: "プロジェクトを閉じる",
                         executedFunction: this.openProjectFile,
                     },
                 ],
@@ -24,21 +48,75 @@ const app = new Vue({
                     },
                 ],
             },
-        },
+        };
     },
-    mounted: function () {},
     methods: {
-        switchSubMenuShown: function (event) {
-            const subMenuId = event.target.id.split("__")[1];
-            console.log("openSubMenu");
-            if (
-                this.header.subMenus.isShown &&
-                this.header.subMenus.shownSubMenuId === subMenuId
-            ) {
-                this.header.subMenus.isShown = false;
+        keyDowned: function (event) {
+            const keyName = event.key;
+            switch (keyName) {
+                case "Escape":
+                    this.closeSubMenus();
+                    break;
+                default:
+                    break;
+            }
+        },
+        coverClicked: function () {
+            this.closeSubMenus();
+        },
+        showCover: function () {
+            this.isCoverShown = true;
+        },
+        hideCover: function () {
+            this.isCoverShown = false;
+        },
+        openSubMenus: function (subMenusId) {
+            this.header.subMenus.position.top = 0;
+            this.header.subMenus.position.left = 0;
+            this.header.subMenus.shownSubMenusId = subMenusId;
+            this.setSubMenusPosition(subMenusId);
+            this.showCover();
+            this.header.subMenus.isShown = true;
+        },
+        closeSubMenus: function () {
+            this.header.menuBar.isClicked = false;
+            this.header.menuBar.isMouseDowned = false;
+            this.header.subMenus.isShown = false;
+            this.header.subMenus.shownSubMenusId = null;
+            this.hideCover();
+        },
+        setSubMenusPosition: function (subMenusId) {
+            const menus = this.$refs.menu;
+            this.header.subMenus.position.top = menus[0].offsetHeight + 1;
+            for (const menu of menus) {
+                if (menu.id.split("__")[1] === subMenusId) {
+                    break;
+                } else {
+                    this.header.subMenus.position.left +=
+                        menu.getBoundingClientRect().width;
+                }
+            }
+        },
+        menuClicked: function () {
+            if (this.header.menuBar.isClicked) {
+                this.header.menuBar.isClicked = false;
+                this.closeSubMenus();
             } else {
-                this.header.subMenus.isShown = true;
-                this.header.subMenus.shownSubMenuId = subMenuId;
+                this.header.menuBar.isClicked = true;
+            }
+        },
+        menuMouseDowned: function (event) {
+            const subMenusId = event.target.id.split("__")[1];
+            this.openSubMenus(subMenusId);
+            this.header.menuBar.isMouseDowned = true;
+        },
+        menuMouseOver: function (event) {
+            if (
+                this.header.menuBar.isMouseDowned &&
+                this.header.menuBar.isClicked
+            ) {
+                const subMenusId = event.target.id.split("__")[1];
+                this.openSubMenus(subMenusId);
             }
         },
         openProjectFile: function () {},
