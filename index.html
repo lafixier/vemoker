@@ -9,22 +9,36 @@
         <title>Vemoker</title>
     </head>
     <body>
-        <div id="app">
+        <div id="app" @keydown="keyDowned">
+            <div
+                class="cover"
+                v-show="isCoverShown"
+                @click="coverClicked"
+            ></div>
             <header id="header">
                 <div class="menu-bar">
                     <span
-                        :id="'menu__' + menu.subMenuId"
+                        :id="'menu__' + menu.subMenusId"
                         class="menu"
+                        :class="{ selected: header.subMenus.shownSubMenusId === menu.subMenusId}"
+                        ref="menu"
                         v-for="menu in header.menuBar.menus"
-                        @click="switchSubMenuShown"
+                        @click="menuClicked"
+                        @mousedown.left="menuMouseDowned"
+                        @mouseover="menuMouseOver"
                     >
                         {{ menu.name }}
                     </span>
                 </div>
-                <div class="sub-menus" v-show="header.subMenus.isShown">
+                <div
+                    class="sub-menus"
+                    v-show="header.subMenus.isShown"
+                    :style="{ top: header.subMenus.position.top+'px', left:header.subMenus.position.left+'px' }"
+                >
                     <div
                         class="sub-menu"
-                        v-for="subMenu in header.subMenus[header.subMenus.shownSubMenuId]"
+                        v-for="subMenu in header.subMenus[header.subMenus.shownSubMenusId]"
+                        @click="subMenu.executedFunction"
                     >
                         {{ subMenu.shownName }}
                     </div>

@@ -8,7 +8,18 @@ body {
     margin: 0;
     text-align: center;
     #app {
+        height: 100vh;
+        .cover {
+            height: 100vh;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
         #header {
+            position: relative;
+            z-index: 1100;
             .menu-bar {
                 text-align: left;
                 user-select: none;
@@ -17,15 +28,24 @@ body {
                     font-size: 15px;
                     padding: 5px 10px 5px 10px;
                 }
-                .menu:hover {
+                .menu:hover,
+                .selected {
                     background-color: #e0e0e0;
                     color: black;
                 }
             }
             .sub-menus {
-                left: 0;
+                background-color: #2196f3;
+                font-size: 15px;
                 position: absolute;
-                top: 0;
+                text-align: left;
+                user-select: none;
+                .sub-menu {
+                    padding: 10px;
+                }
+                .sub-menu:hover {
+                    background-color: #42a5f5;
+                }
             }
         }
     }
