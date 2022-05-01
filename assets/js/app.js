@@ -57,9 +57,16 @@ const app = new Vue({
                 case "Escape":
                     this.closeSubMenus();
                     break;
+                case "Alt":
+                    this.switchMenuSelected(
+                        this.header.menuBar.menus[0].subMenusId
+                    );
                 default:
                     break;
             }
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
         },
         coverClicked: function () {
             this.closeSubMenus();
@@ -69,6 +76,16 @@ const app = new Vue({
         },
         hideCover: function () {
             this.isCoverShown = false;
+        },
+        switchMenuSelected: function (subMenusId) {
+            if (
+                this.header.subMenus.shownSubMenusId !== null ||
+                this.header.subMenus.isShown
+            ) {
+                this.closeSubMenus();
+            } else {
+                this.header.subMenus.shownSubMenusId = subMenusId;
+            }
         },
         openSubMenus: function (subMenusId) {
             this.header.subMenus.position.top = 0;
