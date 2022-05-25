@@ -50,14 +50,14 @@ body {
         }
         #main {
             .upper {
-		display: flex;
-		.canvas {
+                display: flex;
+                .canvas {
                     display: inline-block;
-		    width: 65%;
+                    width: 65%;
                 }
                 .properties {
                     display: inline-block;
-		    width: 35%;
+                    width: 35%;
                 }
             }
             .lower {
