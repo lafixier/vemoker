@@ -1,0 +1,46 @@
+{
+    "used_app_version": "0.1.0",
+    "materials": [
+        {
+            "name": "chaban_background",
+            "base64": "data:image/jpeg;base64,........."
+        },
+        {
+            "name": "tada_person",
+            "base64": "data:image/jpeg;base64,........."
+        }
+    ],
+    "layers": [
+        {
+            "number": 0,
+            "element": {
+                "isMaterialUsed": true,
+                "type": "image",
+                "material_name": "chaban_background",
+                "position": { "x": "0px", "y": "0px" }
+            }
+        },
+        {
+            "number": 1,
+            "element": {
+                "isMaterialUsed": true,
+                "type": "image",
+                "material_name": "tada_person",
+                "position": { "x": "50px", "y": "50px" }
+            }
+        },
+        {
+            "number": 2,
+            "element": {
+                "isMaterialUsed": false,
+                "type": "text",
+                "text": {
+                    "body": "こんにちは",
+                    "font_name": "すごいフォント名",
+                    "font_size": "30px"
+                },
+                "position": { "x": "300px", "y": "750px" }
+            }
+        }
+    ]
+}
