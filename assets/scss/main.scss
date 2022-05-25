@@ -51,9 +51,19 @@ body {
         #main {
             .upper {
                 display: flex;
+                margin-left: 10px;
+                margin-top: 20px;
                 .canvas {
                     display: inline-block;
-                    width: 65%;
+                    // width: 65%;
+                    #layer-0 {
+                        position: relative;
+                        .layer {
+                            left: 0;
+                            position: absolute;
+                            top: 0;
+                        }
+                    }
                 }
                 .properties {
                     display: inline-block;

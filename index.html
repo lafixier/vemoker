@@ -47,7 +47,20 @@
             <main id="main">
                 <div class="upper">
                     <div class="canvas">
-                        <!-- <video src="./assets/videos/test.mp4"></video> -->
+                        <div id="layer-0" class="layer">
+                            <img :src="main.upper.canvas.layers[0].img" />
+                            <div
+                                :id="'layer-' + layer.number"
+                                class="layer"
+                                v-for="layer in main.upper.canvas.layers.slice(1)"
+                            >
+                                <img
+                                    :src="layer.img"
+                                    :width="layer.width"
+                                    :height="layer.height"
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div class="properties"></div>
                 </div>

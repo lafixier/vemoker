@@ -17,6 +17,23 @@ const app = new Vue({
                 position: { top: 0, left: 0 },
             },
         },
+        main: {
+            upper: {
+                canvas: {
+                    layers: [
+                        {
+                            number: 0,
+                            img: "./assets/images/chaban_background.jpg",
+                        },
+                        {
+                            number: 1,
+                            img: "./assets/images/tada_person.png",
+                            width: "100%",
+                        },
+                    ],
+                },
+            },
+        },
     },
     mounted: function () {
         document.body.addEventListener("keydown", this.keyDowned);
