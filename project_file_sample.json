@@ -15,7 +15,8 @@
                 "isMaterialUsed": true,
                 "type": "image",
                 "material_name": "chaban_background",
-                "position": { "x": "0px", "y": "0px" }
+                "position": { "x": "0px", "y": "0px" },
+                "size": { "height": "" }
             }
         },
         {
@@ -24,7 +25,8 @@
                 "isMaterialUsed": true,
                 "type": "image",
                 "material_name": "tada_person",
-                "position": { "x": "50px", "y": "50px" }
+                "position": { "x": "50px", "y": "50px" },
+                "size": { "height": "200px" }
             }
         },
         {
@@ -37,7 +39,8 @@
                     "font_name": "Meiryo",
                     "font_size": "30px"
                 },
-                "position": { "x": "300px", "y": "750px" }
+                "position": { "x": "300px", "y": "750px" },
+                "size": { "height": "" }
             }
         }
     ]
