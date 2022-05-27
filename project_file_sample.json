@@ -12,6 +12,10 @@
         {
             "number": 0,
             "element": {
+                "activeTime": {
+                    "start": 0,
+                    "end": 60
+                },
                 "isMaterialUsed": true,
                 "type": "image",
                 "material_name": "chaban_background",
@@ -22,6 +26,10 @@
         {
             "number": 1,
             "element": {
+                "activeTime": {
+                    "start": 0,
+                    "end": 60
+                },
                 "isMaterialUsed": true,
                 "type": "image",
                 "material_name": "tada_person",
@@ -32,6 +40,10 @@
         {
             "number": 2,
             "element": {
+                "activeTime": {
+                    "start": 0,
+                    "end": 2
+                },
                 "isMaterialUsed": false,
                 "type": "text",
                 "text": {
