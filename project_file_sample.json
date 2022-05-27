@@ -34,7 +34,7 @@
                 "type": "text",
                 "text": {
                     "body": "こんにちは",
-                    "font_name": "すごいフォント名",
+                    "font_name": "Meiryo",
                     "font_size": "30px"
                 },
                 "position": { "x": "300px", "y": "750px" }
