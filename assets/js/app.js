@@ -1,6 +1,101 @@
+const debug = {
+    projectFile: {
+        used_app_version: "0.1.0",
+        materials: {
+            chaban_background: {
+                base64: "data:image/jpeg;base64,",
+            },
+            tada_person: {
+                base64: "data:image/png;base64,",
+            },
+        },
+        layers: [
+            {
+                number: 0,
+                elements: [
+                    {
+                        activeTime: {
+                            start: 0,
+                            end: 60,
+                        },
+                        isMaterialUsed: true,
+                        type: "image",
+                        material_name: "chaban_background",
+                        position: { x: "0px", y: "0px" },
+                        size: { height: "" },
+                    },
+                ],
+            },
+            {
+                number: 1,
+                elements: [
+                    {
+                        activeTime: {
+                            start: 0,
+                            end: 60,
+                        },
+                        isMaterialUsed: true,
+                        type: "image",
+                        material_name: "tada_person",
+                        position: {
+                            x: "5%",
+                            y: "20%",
+                        },
+                        size: { height: "200px" },
+                    },
+                ],
+            },
+            {
+                number: 2,
+                elements: [
+                    {
+                        activeTime: {
+                            start: 0,
+                            end: 2,
+                        },
+                        isMaterialUsed: false,
+                        type: "text",
+                        text: {
+                            body: "こんにちは",
+                            font_name: "Meiryo",
+                            font_size: "30px",
+                        },
+                        position: {
+                            x: "39%",
+                            y: "75%",
+                        },
+                        size: { height: "" },
+                    },
+                    {
+                        activeTime: {
+                            start: 2,
+                            end: 5,
+                        },
+                        isMaterialUsed: false,
+                        type: "text",
+                        text: {
+                            body: "これはテロップです！！！！！！！！！",
+                            font_name: "Meiryo",
+                            font_size: "30px",
+                        },
+                        position: {
+                            x: "19%",
+                            y: "75%",
+                        },
+                        size: { height: "" },
+                    },
+                ],
+            },
+        ],
+    },
+};
+
 const app = new Vue({
     el: "#app",
     data: {
+        redrawIntervalSecond: 0.01,
+        redrawIntervalObject: null,
+        currentTimeSecond: 0,
         isCoverShown: false,
         header: {
             menuBar: {
@@ -23,15 +118,29 @@ const app = new Vue({
                     layers: [
                         {
                             number: 0,
-                            img: "./assets/images/chaban_background.jpg",
+                            element: {
+                                position: {},
+                            },
                         },
                         {
                             number: 1,
-                            img: "./assets/images/tada_person.png",
-                            width: "100%",
+                            element: {
+                                position: {},
+                            },
+                        },
+                        {
+                            number: 2,
+                            element: {
+                                position: {},
+                            },
                         },
                     ],
                 },
+            },
+        },
+        externalStorage: {
+            projectFile: {
+                materials: {},
             },
         },
     },
@@ -66,6 +175,7 @@ const app = new Vue({
                 ],
             },
         };
+        // this.openProjectFile(); // debug
     },
     methods: {
         keyDowned: function (event) {
@@ -153,7 +263,40 @@ const app = new Vue({
                 this.openSubMenus(subMenusId);
             }
         },
-        openProjectFile: function () {},
+        openProjectFile: function () {
+            // Debug
+            this.externalStorage.projectFile = debug.projectFile;
+            this.playCanvas();
+            this.stopCanvas();
+        },
         openVersionInformation: function () {},
+        playCanvas: function () {
+            this.redrawIntervalObject = setInterval(
+                this.redrawCanvas,
+                this.redrawIntervalSecond * 1000
+            );
+        },
+        pauseCanvas: function () {
+            clearInterval(this.redrawIntervalObject);
+        },
+        stopCanvas: function () {
+            this.pauseCanvas();
+            this.currentTimeSecond = 0;
+        },
+        redrawCanvas: function () {
+            this.currentTimeSecond += this.redrawIntervalSecond;
+            for (const layer of this.externalStorage.projectFile.layers) {
+                for (const element of layer.elements) {
+                    if (
+                        this.currentTimeSecond >= element.activeTime.start &&
+                        this.currentTimeSecond >= element.activeTime.end
+                    ) {
+                        // console.log(element);
+                        this.main.upper.canvas.layers[layer.number].element =
+                            JSON.parse(JSON.stringify(element));
+                    }
+                }
+            }
+        },
     },
 });

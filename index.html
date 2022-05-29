@@ -47,18 +47,32 @@
             <main id="main">
                 <div class="upper">
                     <div class="canvas">
-                        <div id="layer-0" class="layer">
-                            <img :src="main.upper.canvas.layers[0].img" />
+                        <div
+                            id="layer-0"
+                            class="layer"
+                            v-if="externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name] !== undefined"
+                        >
+                            <img
+                                :src="externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name].base64"
+                                :style="{ top: main.upper.canvas.layers[0].element.position.y, left: main.upper.canvas.layers[0].element.position.x }"
+                            />
                             <div
+                                v-for="layer in main.upper.canvas.layers.slice(1)"
                                 :id="'layer-' + layer.number"
                                 class="layer"
-                                v-for="layer in main.upper.canvas.layers.slice(1)"
+                                :style="{ top: layer.element.position.y, left: layer.element.position.x }"
                             >
                                 <img
-                                    :src="layer.img"
-                                    :width="layer.width"
-                                    :height="layer.height"
+                                    v-if="layer.element.type === 'image'"
+                                    :src="externalStorage.projectFile.materials[layer.element.material_name].base64"
+                                    :height="layer.element.size.height"
                                 />
+                                <p
+                                    v-if="layer.element.type === 'text'"
+                                    :style="{ fontFamily: layer.element.text.font_name, fontSize: layer.element.text.font_size }"
+                                >
+                                    {{ layer.element.text.body }}
+                                </p>
                             </div>
                         </div>
                     </div>
