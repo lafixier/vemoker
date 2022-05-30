@@ -47,13 +47,9 @@
             <main id="main">
                 <div class="upper">
                     <div class="canvas">
-                        <div
-                            id="layer-0"
-                            class="layer"
-                            v-if="externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name] !== undefined"
-                        >
+                        <div id="layer-0" class="layer">
                             <img
-                                :src="externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name].base64"
+                                :src="externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name] ? externalStorage.projectFile.materials[main.upper.canvas.layers[0].element.material_name].base64 : ''"
                                 :style="{ top: main.upper.canvas.layers[0].element.position.y, left: main.upper.canvas.layers[0].element.position.x }"
                             />
                             <div

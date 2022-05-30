@@ -175,7 +175,7 @@ const app = new Vue({
                 ],
             },
         };
-        // this.openProjectFile(); // debug
+        this.openProjectFile(); // debug
     },
     methods: {
         keyDowned: function (event) {
@@ -289,7 +289,7 @@ const app = new Vue({
                 for (const element of layer.elements) {
                     if (
                         this.currentTimeSecond >= element.activeTime.start &&
-                        this.currentTimeSecond >= element.activeTime.end
+                        this.currentTimeSecond <= element.activeTime.end
                     ) {
                         // console.log(element);
                         this.main.upper.canvas.layers[layer.number].element =
