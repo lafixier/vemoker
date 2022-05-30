@@ -302,7 +302,6 @@ const app = new Vue({
                         this.currentTimeSecond >= element.activeTime.start &&
                         this.currentTimeSecond <= element.activeTime.end
                     ) {
-                        // console.log(element);
                         this.main.upper.canvas.layers[layer.number].element =
                             JSON.parse(JSON.stringify(element));
                         isElementUpdated = true;
