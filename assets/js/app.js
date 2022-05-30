@@ -93,6 +93,16 @@ const debug = {
 const app = new Vue({
     el: "#app",
     data: {
+        emptyElement: {
+            activeTime: {
+                start: -1,
+                end: -1,
+            },
+            isMaterialUsed: false,
+            type: "",
+            position: { x: "0px", y: "0px" },
+            size: { height: "" },
+        },
         redrawIntervalSecond: 0.01,
         redrawIntervalObject: null,
         currentTimeSecond: 0,
@@ -286,6 +296,7 @@ const app = new Vue({
         redrawCanvas: function () {
             this.currentTimeSecond += this.redrawIntervalSecond;
             for (const layer of this.externalStorage.projectFile.layers) {
+                let isElementUpdated = false;
                 for (const element of layer.elements) {
                     if (
                         this.currentTimeSecond >= element.activeTime.start &&
@@ -294,6 +305,10 @@ const app = new Vue({
                         // console.log(element);
                         this.main.upper.canvas.layers[layer.number].element =
                             JSON.parse(JSON.stringify(element));
+                        isElementUpdated = true;
+                    } else if (!isElementUpdated) {
+                        this.main.upper.canvas.layers[layer.number].element =
+                            this.emptyElement;
                     }
                 }
             }
