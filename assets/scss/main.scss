@@ -71,6 +71,20 @@ body {
                 }
             }
             .lower {
+                .canvas-controls {
+                    padding-left: 10px;
+                    text-align: left;
+                    button {
+                        border: none;
+                        background-color: black;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        padding: 17px;
+                    }
+                    button:hover {
+                        opacity: 0.7;
+                    }
+                }
                 .timeline {
                 }
             }
