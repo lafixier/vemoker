@@ -106,6 +106,7 @@ const app = new Vue({
         redrawIntervalSecond: 0.01,
         redrawIntervalObject: null,
         currentTimeSecond: 0,
+        isPlaying: false,
         isCoverShown: false,
         header: {
             menuBar: {
@@ -198,6 +199,12 @@ const app = new Vue({
                     this.switchMenuSelected(
                         this.header.menuBar.menus[0].subMenusId
                     );
+                case " ":
+                    if (this.isPlaying) {
+                        this.pauseCanvas();
+                    } else {
+                        this.playCanvas();
+                    }
                 default:
                     break;
             }
@@ -277,16 +284,18 @@ const app = new Vue({
             // Debug
             this.externalStorage.projectFile = debug.projectFile;
             this.playCanvas();
-            this.stopCanvas();
+            setTimeout(this.stopCanvas, this.redrawIntervalSecond * 1000);
         },
         openVersionInformation: function () {},
         playCanvas: function () {
+            this.isPlaying = true;
             this.redrawIntervalObject = setInterval(
                 this.redrawCanvas,
                 this.redrawIntervalSecond * 1000
             );
         },
         pauseCanvas: function () {
+            this.isPlaying = false;
             clearInterval(this.redrawIntervalObject);
         },
         stopCanvas: function () {

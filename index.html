@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        />
         <link rel="stylesheet" href="./assets/css/main.css" />
         <title>Vemoker</title>
     </head>
@@ -75,6 +79,17 @@
                     <div class="properties"></div>
                 </div>
                 <div class="lower">
+                    <div class="canvas-controls">
+                        <button @click="playCanvas">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button @click="pauseCanvas">
+                            <i class="fa-solid fa-pause"></i>
+                        </button>
+                        <button @click="stopCanvas">
+                            <i class="fa-solid fa-stop"></i>
+                        </button>
+                    </div>
                     <div class="timeline"></div>
                 </div>
             </main>
