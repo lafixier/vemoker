@@ -164,18 +164,22 @@ const app = new Vue({
                     {
                         shownName: "プロジェクトを開く",
                         executedFunction: this.openProjectFile,
+                        isInputElement: true,
                     },
                     {
                         shownName: "上書き保存",
                         executedFunction: this.openProjectFile,
+                        isInputElement: false,
                     },
                     {
                         shownName: "名前を付けて保存",
                         executedFunction: this.openProjectFile,
+                        isInputElement: true,
                     },
                     {
                         shownName: "プロジェクトを閉じる",
                         executedFunction: this.openProjectFile,
+                        isInputElement: false,
                     },
                 ],
                 other: [

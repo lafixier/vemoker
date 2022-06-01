@@ -39,13 +39,14 @@
                     v-show="header.subMenus.isShown"
                     :style="{ top: header.subMenus.position.top+'px', left:header.subMenus.position.left+'px' }"
                 >
-                    <div
+                    <label
                         class="sub-menu"
                         v-for="subMenu in header.subMenus[header.subMenus.shownSubMenusId]"
                         @click="subMenu.executedFunction"
                     >
+                        <input v-if="subMenu.isInputElement" type="file" />
                         {{ subMenu.shownName }}
-                    </div>
+                    </label>
                 </div>
             </header>
             <main id="main">

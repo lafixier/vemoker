@@ -41,7 +41,11 @@ body {
                 text-align: left;
                 user-select: none;
                 .sub-menu {
+                    display: block;
                     padding: 10px;
+                    input[type="file"] {
+                        display: none;
+                    }
                 }
                 .sub-menu:hover {
                     background-color: #42a5f5;
